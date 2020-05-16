@@ -21,7 +21,8 @@ or, if you are doing your own dotfiles repository I recommend using `submodule`
 so you have the same independency from the rest of your repo:
 
 ```
-git submodule add https://github.com/CyberGsus/qtile-config ~/.config/qtile
+git submodule add https://github.com/CyberGsus/qtile-config .config/qtile-config
+ln -s .config/qtile-config .config/qtile
 ```
 ## More stuff
 
