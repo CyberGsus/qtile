@@ -23,3 +23,7 @@ so you have the same independency from the rest of your repo:
 ```
 git submodule add https://github.com/CyberGsus/qtile-config ~/.config/qtile
 ```
+## More stuff
+
+On my [TODO](./TODO.md) list I have put everything I have to do in order
+to get this repository even more independent.
