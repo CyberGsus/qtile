@@ -23,11 +23,11 @@ def apply_alpha_qtile(color_1, color_2, alpha):
     elif type(color_2) == str:
         return apply_alpha_qtile(color_1, [color_2], alpha)
 
-    color1_np =  [*map(qtile_to_np, color_1)]
-    color2_np =  [*map(qtile_to_np, color_2)]
+    color1_np =  map(qtile_to_np, color_1)
+    color2_np =  map(qtile_to_np, color_2)
 
-    color_np_alpha = [*map(lambda x: apply_alpha(x[0], x[1], alpha), zip(
-        color1_np, color2_np))]
+    color_np_alpha = map(lambda x: apply_alpha(x[0], x[1], alpha), zip(
+        color1_np, color2_np))
 
     return [*map(np_to_qtile, color_np_alpha)]
 
