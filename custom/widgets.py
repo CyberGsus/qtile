@@ -196,7 +196,7 @@ def init_laptop_widgets():
         image('secondary'),
         wallpaper('secondary')
     ]
-    # Change my wallpaper every 10 minutes
+    # Change my wallpaper every 20 minutes
     change_wallpaper(wallpaper(None), 20 * 60)
     return widget_list
 
@@ -223,8 +223,8 @@ defaults = dict(
     fontsize=12,
     padding=2,
 )
-try:
-    import os
-    os.remove(os.path.expanduser('~/.local/share/wallpapers/current'))
-except:
-    pass
+# try:
+#     import os
+#     os.remove(os.path.expanduser('~/.local/share/wallpapers/current'))
+# except:
+#     pass
