@@ -8,10 +8,22 @@ import os.path
 from custom.bindings import get_keyboard
 from custom.coloring import apply_alpha_qtile
 from custom.extra import one_call
-from custom.functions import change_wallpaper
+from custom.functions import change_wallpaper, poweroff
 from custom.theme import colors, img
 from custom.wallpapers.wrapper import ExtendedWallpaper
+import custom.image
 
+
+
+@one_call
+def notifications(color):
+    return widget.Notify(
+            background=colors[color],
+            foreground=colors['light'],
+            fontsize=11,
+            padding=3,
+            default_timeout=3
+    )
 
 @one_call
 def wallpaper(color):
@@ -105,7 +117,7 @@ def systray():
 def image(image):
     return widget.Image(
         scale=True,
-        filename=img[image],
+        filename=custom.image.get(image),
         background=colors["dark"]
     )
 
@@ -136,6 +148,8 @@ def net(bgcolor):
         interface="wlp2s0",
         foreground=colors["light"],
         background=colors[bgcolor],
+        update_interval=2,
+        use_bits=True,
     )
 
 
@@ -176,7 +190,10 @@ def init_laptop_widgets():
         sep(5),
         systray(),
         sep(5),
-        image("bg-to-secondary"),
+        image("bg-to-primary"),
+        text_box(" \U0001F514", 'primary'),
+        notifications('primary'),
+        image('secondary'),
         text_box(" ⟳", "secondary"),
         pacman("secondary"),
         image("primary"),
@@ -197,7 +214,7 @@ def init_laptop_widgets():
         wallpaper('secondary')
     ]
     # Change my wallpaper every 20 minutes
-    change_wallpaper(wallpaper(None), 20 * 60)
+    # change_wallpaper(wallpaper(None), 20 * 60)
     return widget_list
 
 

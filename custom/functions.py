@@ -9,8 +9,8 @@ import os
 globals()['tmux_session_manager'] = TmuxSessionManager('alacritty -e')
 
 
+
 def next_keyboard_layout(keyboard):
-    @lazy.function
     def __inner(qtile_session):
         keyboard = __inner.__getattribute__('keyboard')
         if keyboard is not None:
@@ -18,8 +18,19 @@ def next_keyboard_layout(keyboard):
         else:
             qtile_session.restart()
     __inner.keyboard = keyboard
-    return __inner
+    return lazy.function(__inner)
 
+def poweroff(poff_widget, timeout = 5):
+    def t(qtile):
+        if t.started:
+            t.timer.cancel()
+        else:
+            t.timer = Timer(t.timeout, qtile.stop)
+            t.timer.start()
+    t.timer = None
+    t.started = False
+    t.timeout = timeout
+    return t
 
 @lazy.function
 def quit_qtile(qtile_session):
