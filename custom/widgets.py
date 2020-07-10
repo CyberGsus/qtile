@@ -17,19 +17,19 @@ from custom.wallpapers.wrapper import ExtendedWallpaper
 def wallpaper(color):
     return ExtendedWallpaper(
         background=colors[color],
-        foreground=colors['light'],
+        foreground=colors["light"],
         fontsize=11,
         padding=3,
         margin=0,
-        directory=os.path.expanduser('~/.local/share/wallpapers/links/'),
-        label='Wallpaper',
+        directory=os.path.expanduser("~/.local/share/wallpapers/links/"),
+        label="Wallpaper",
         # wallpaper_command=os.path.expanduser('~/.scripts/bg.sh').split(),
     )
 
 
 @one_call
 def keyboard(kbd, color):
-    kbd.foreground = colors['light']
+    kbd.foreground = colors["light"]
     kbd.background = colors[color]
     return kbd
 
@@ -38,23 +38,20 @@ def keyboard(kbd, color):
 def battery(color):
     return widget.Battery(
         background=colors[color],
-        foreground=colors['light'],
-        charge_char='\U0001F50C',
-        discharge_char='\u26a1 ',
-        empty_char='\u2620',
-        full_char='\U0001f50b',
+        foreground=colors["light"],
+        charge_char="\U0001F50C",
+        discharge_char="\u26a1 ",
+        empty_char="\u2620",
+        full_char="\U0001f50b",
         show_short_text=False,
-        format='{char} {percent:2.2%} {watt:.2f} W',
-        update_interval=1.5
+        format="{char} {percent:2.2%} {watt:.2f} W",
+        update_interval=1.5,
     )
 
 
 def sep(p):
     return widget.Sep(
-        linewidth=0,
-        padding=p,
-        foreground=colors["light"],
-        background=colors["dark"]
+        linewidth=0, padding=p, foreground=colors["light"], background=colors["dark"]
     )
 
 
@@ -77,9 +74,8 @@ def group_box():
         other_screen_border=colors["dark"],
         foreground=colors["light"],
         background=colors["dark"],
-        highlight_color=apply_alpha_qtile(
-            colors["dark"], colors["light"], 0.15),
-        font=defaults['font_alt'],
+        highlight_color=apply_alpha_qtile(colors["dark"], colors["light"], 0.15),
+        font=defaults["font_alt"],
     )
 
 
@@ -89,34 +85,24 @@ def window_name():
         foreground=colors["primary"],
         background=colors["dark"],
         show_state=True,
-        fontsize=defaults['fontsize'],
-        font=defaults['font_alt']
+        fontsize=defaults["fontsize"],
+        font=defaults["font_alt"],
     )
 
 
 @one_call
 def systray():
-    return widget.Systray(
-        background=colors["dark"],
-        padding=5
-    )
+    return widget.Systray(background=colors["dark"], padding=5)
 
 
 def image(image):
-    return widget.Image(
-        scale=True,
-        filename=img[image],
-        background=colors["dark"]
-    )
+    return widget.Image(scale=True, filename=img[image], background=colors["dark"])
 
 
 @lru_cache(20)
 def text_box(s, bgcolor):
     return widget.TextBox(
-        text=s,
-        foreground=colors["light"],
-        background=colors[bgcolor],
-        **defaults
+        text=s, foreground=colors["light"], background=colors[bgcolor], **defaults
     )
 
 
@@ -126,34 +112,28 @@ def pacman(bgcolor):
         execute="alacritty -e bash -c '~/.scripts/upgrading.sh'",
         update_interval=10,
         foreground=colors["light"],
-        background=colors[bgcolor]
+        background=colors[bgcolor],
     )
 
 
 @one_call
 def net(bgcolor):
     return widget.Net(
-        interface="wlp2s0",
-        foreground=colors["light"],
-        background=colors[bgcolor],
+        interface="wlp2s0", foreground=colors["light"], background=colors[bgcolor],
     )
 
 
 @one_call
 def current_layout_icon(bgcolor):
     return widget.CurrentLayoutIcon(
-        scale=0.65,
-        foreground=colors["light"],
-        background=colors[bgcolor],
+        scale=0.65, foreground=colors["light"], background=colors[bgcolor],
     )
 
 
 @one_call
 def current_layout(bgcolor):
     return widget.CurrentLayout(
-        foreground=colors["light"],
-        background=colors[bgcolor],
-        padding=5
+        foreground=colors["light"], background=colors[bgcolor], padding=5
     )
 
 
@@ -162,7 +142,7 @@ def clock(bgcolor):
     return widget.Clock(
         foreground=colors["light"],
         background=colors[bgcolor],
-        format="%a %B %d %Y [ %T ]"
+        format="%a %B %d %Y [ %T ]",
     )
 
 
@@ -180,9 +160,9 @@ def init_laptop_widgets():
         text_box(" ⟳", "secondary"),
         pacman("secondary"),
         image("primary"),
-        text_box(' \u2328', 'primary'),
+        text_box(" \u2328", "primary"),
         keyboard(get_keyboard(), "primary"),
-        image('secondary'),
+        image("secondary"),
         battery("secondary"),
         image("primary"),
         text_box(" ↯", "primary"),
@@ -193,8 +173,8 @@ def init_laptop_widgets():
         image("primary"),
         text_box(" 🕒", "primary"),
         clock("primary"),
-        image('secondary'),
-        wallpaper('secondary')
+        image("secondary"),
+        wallpaper("secondary"),
     ]
     # Change my wallpaper every 20 minutes
     change_wallpaper(wallpaper(None), 20 * 60)
@@ -213,15 +193,12 @@ def init_monitor_widgets():
         current_layout("secondary"),
         image("primary"),
         text_box(" 🕒", "primary"),
-        clock("primary")
+        clock("primary"),
     ]
 
 
 defaults = dict(
-    font='JetBrains Mono',
-    font_alt='IBMPlexMono, Bold Italic',
-    fontsize=12,
-    padding=2,
+    font="JetBrains Mono", font_alt="IBMPlexMono, Bold Italic", fontsize=12, padding=2,
 )
 # try:
 #     import os
