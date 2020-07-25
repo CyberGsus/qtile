@@ -1,0 +1,15 @@
+custom/functions.py
+custom/theme.py
+custom/utils.py
+custom/widgets.py
+themes/dracula/colors.json
+themes/dracula/img/bg-to-primary.png
+themes/dracula/img/bg-to-secondary.png
+themes/dracula/img/primary.png
+themes/dracula/img/secondary.png
+themes/dracula/pattern.svg
+themes/dracula/test.bmp
+themes/images.py
+themes/material-darker/colors.json
+themes/pattern.svg
+

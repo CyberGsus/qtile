@@ -4,13 +4,13 @@ import asyncio
 
 async def async_call(cmd):
     if type(cmd) in (list, tuple):
-        cmd = ' '.join(cmd)
+        cmd = " ".join(cmd)
     if type(cmd) != str:
-        raise TypeError(f'Expected list,tuple or str, got instead {type(cmd).__name__!r}')
-    try:
-        (await asyncio.create_subprocess_shell(cmd)).communicate()
-    except:
-        pass
+        raise TypeError(
+            f"Expected list,tuple or str, got instead {type(cmd).__name__!r}"
+        )
+    (await asyncio.create_subprocess_shell(cmd)).communicate()
+
 
 def run_coroutine(coro):
     try:
@@ -19,15 +19,18 @@ def run_coroutine(coro):
         loop = asyncio.new_event_loop()
     loop.run_until_complete(coro)
 
+
 class ExtendedWallpaper(Wallpaper):
     """
     Extends the Wallpaper class in order
     to be able to call certain functions with ease
     """
+
     def next_wallpaper(self):
         self.index += 1
         self.index %= len(self.images)
         self.set_wallpaper()
+
 
 class AsyncWallpaper(ExtendedWallpaper):
     """
@@ -36,10 +39,9 @@ class AsyncWallpaper(ExtendedWallpaper):
     transitions without the need to worry about locking qtile.
     """
 
-
     # Override
     def set_wallpaper(self):
-        ### Copied this from original as needed
+        # Copied this from original as needed
         if len(self.images) == 0:
             if self.wallpaper is None:
                 self.text = "empty"
@@ -51,13 +53,13 @@ class AsyncWallpaper(ExtendedWallpaper):
             self.text = os.path.basename(cur_image)
         else:
             self.text = self.label
-        if not self.wallpaper_command: # Inverted logic in order to pack
+        if not self.wallpaper_command:  # Inverted logic in order to pack
             # everything inside a block
             self.qtile.paint_screen(self.bar.screen, cur_image, self.option)
 
         else:
             self.wallpaper_command.append(cur_image)
-            ### Next lines are mine
+            # Next lines are mine
 
             run_coroutine(async_call(self.wallpaper_command))
 

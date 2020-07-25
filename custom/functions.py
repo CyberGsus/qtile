@@ -6,17 +6,18 @@ from threading import Timer
 from time import sleep
 import os
 
-globals()['tmux_session_manager'] = TmuxSessionManager('alacritty -e')
+globals()["tmux_session_manager"] = TmuxSessionManager("alacritty -e")
 
 
 def next_keyboard_layout(keyboard):
     @lazy.function
     def __inner(qtile_session):
-        keyboard = __inner.__getattribute__('keyboard')
+        keyboard = __inner.__getattribute__("keyboard")
         if keyboard is not None:
             keyboard.cmd_next_keyboard()
         else:
             qtile_session.restart()
+
     __inner.keyboard = keyboard
     return __inner
 
@@ -32,13 +33,12 @@ def quit_qtile(qtile_session):
 
 @hook.subscribe.addgroup
 def on_group_add(qtile, group):
-    groups = globals().get('groups', None)
+    groups = globals().get("groups", None)
     if groups is None:
         groups = []
-        globals()['groups'] = groups
+        globals()["groups"] = groups
     groups.append(group)
 
 
 def change_wallpaper(wallpaper_obj, timeout):
-    InfiniteTimer(
-        timeout, wallpaper_obj.next_wallpaper).start()
+    InfiniteTimer(timeout, wallpaper_obj.next_wallpaper).start()

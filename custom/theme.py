@@ -6,9 +6,7 @@ import json
 # color scheme available in ~/.config/qtile/themes
 theme = "dracula"
 
-theme_path = path.join(
-    path.expanduser("~"), ".config", "qtile", "themes", theme
-)
+theme_path = path.join(path.expanduser("~"), ".config", "qtile", "themes", theme)
 
 # map color name to hex values
 with open(path.join(theme_path, "colors.json")) as f:
