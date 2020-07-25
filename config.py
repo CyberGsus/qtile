@@ -96,7 +96,7 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 
-# XXcX: Gasp! We're lying here. In fact, nobody really uses or cares about this
+# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
 # string besides java UI toolkits; you can see several discussions on the
 # mailing lists, GitHub issues, and other WM documentation that suggest setting
 # this string if your java app doesn't work correctly. We may as well just lie
